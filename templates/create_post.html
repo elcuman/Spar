@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 card p-4 shadow">
+        <h3 class="mb-4">Yeni Alım/Satım İlanı</h3>
+        <form method="POST">
+            <label class="fw-bold small">İlan Başlığı</label>
+            <input type="text" name="title" class="form-control mb-3" required>
+            
+            <label class="fw-bold small">İlan Türü</label>
+            <select name="type" class="form-select mb-3">
+                <option value="Alım">Alım Yapacağım (Talep Ediyorum)</option>
+                <option value="Satım">Satış Yapacağım (Tedarik Ediyorum)</option>
+            </select>
+            
+            <label class="fw-bold small">İlan Detayı</label>
+            <textarea name="content" class="form-control mb-4" rows="5" required></textarea>
+            
+            <button class="btn btn-success w-100">İlanı Yayınla</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

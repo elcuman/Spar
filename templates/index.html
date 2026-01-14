@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Ticaret Panosu</h2>
+<div class="row">
+    {% for post in posts %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <span class="badge {% if post.type == 'Alım' %}bg-danger{% else %}bg-success{% endif %} mb-2">{{ post.type }} İlanı</span>
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="text-muted small">{{ post.content }}</p>
+                <hr>
+                <div class="small"><strong>Firma:</strong> {{ post.author.company_name }}</div>
+                <div class="small"><strong>Sektör:</strong> {{ post.author.sector }}</div>
+                {% if current_user.is_authenticated and post.user_id != current_user.id %}
+                <button class="btn btn-primary btn-sm w-100 mt-3" data-bs-toggle="modal" data-bs-target="#offer{{post.id}}">Teklif Ver</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="offer{{post.id}}" tabindex="-1">
+        <div class="modal-dialog">
+            <form action="/send_offer/{{post.id}}" method="POST" class="modal-content">
+                <div class="modal-header"><h5>Hızlı Teklif Gönder</h5></div>
+                <div class="modal-body">
+                    <input type="text" name="price_offer" class="form-control mb-2" placeholder="Fiyat Teklifiniz (Örn: 1000$)" required>
+                    <textarea name="message" class="form-control" rows="3" placeholder="Notunuz..." required></textarea>
+                </div>
+                <div class="modal-footer"><button class="btn btn-success w-100">Gönder</button></div>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

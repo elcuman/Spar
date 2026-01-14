@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-4 border-0 shadow-sm text-center">
+            <div class="rounded-circle bg-primary text-white d-inline-block mx-auto mb-3" style="width: 70px; height: 70px; line-height: 70px; font-size: 1.5rem;">
+                {{ user.username[0].upper() }}
+            </div>
+            <h4>{{ user.company_name }}</h4>
+            <span class="badge bg-light text-dark border mb-3">{{ user.sector }}</span>
+            <p class="text-muted small">@{{ user.username }}</p>
+            <hr>
+            <p><strong>Admin Yetkisi:</strong> {{ "Evet" if user.is_admin else "Hayır" }}</p>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h4 class="mb-4">İlanlarım</h4>
+        {% if posts %}
+            {% for post in posts %}
+            <div class="card mb-3 border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <span class="badge {% if post.type == 'Alım' %}bg-info{% else %}bg-warning text-dark{% endif %}">{{ post.type }}</span>
+                    </div>
+                    <p class="text-muted small">{{ post.content }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-light border text-center">Henüz ilanınız yok.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

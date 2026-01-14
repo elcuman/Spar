@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h4 class="mb-3">Gelen Teklifler (İlanlarıma)</h4>
+        {% for o in received %}
+        <div class="card mb-2 border-start border-primary border-4 shadow-sm">
+            <div class="card-body">
+                <h6>{{ o.post.title }}</h6>
+                <p class="small mb-1"><strong>Teklif Veren:</strong> {{ o.sender.company_name }}</p>
+                <p class="text-primary fw-bold mb-1">Fiyat: {{ o.price_offer }}</p>
+                <p class="text-muted small italic">"{{ o.message }}"</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-6">
+        <h4 class="mb-3">Giden Tekliflerim (Başkalarına)</h4>
+        {% for o in sent %}
+        <div class="card mb-2 shadow-sm border-start border-success border-4">
+            <div class="card-body">
+                <h6>{{ o.post.title }}</h6>
+                <p class="text-success fw-bold">Teklifiniz: {{ o.price_offer }}</p>
+                <p class="small">Hedef Firma: {{ o.post.author.company_name }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
