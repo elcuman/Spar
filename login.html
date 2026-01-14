@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white text-center">
+                <h4>Sisteme Giriş</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Kullanıcı Adı</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Şifre</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Giriş Yap</button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <small>Hesabınız yok mu? <a href="{{ url_for('register') }}">Hemen Kaydolun</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

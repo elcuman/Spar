@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Güncel Ticaret İlanları</h2>
+    <a href="/create" class="btn btn-success">+ Yeni İlan</a>
+</div>
+<div class="row">
+    {% for post in posts %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <span class="badge {% if post.type == 'Alım' %}bg-info{% else %}bg-warning text-dark{% endif %} mb-2">
+                    {{ post.type }} Talebi
+                </span>
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text text-muted">{{ post.content[:100] }}...</p>
+                <hr>
+                <p class="small mb-0"><strong>Firma:</strong> {{ post.author.company_name }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <button class="btn btn-outline-primary btn-sm w-100">Teklif Ver / Detay</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
